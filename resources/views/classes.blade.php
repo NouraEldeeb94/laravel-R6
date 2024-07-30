@@ -30,6 +30,8 @@
               <th scope="col">Class Name</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
+              <th scope="col">Time_From</th>
+              <th scope="col">Time_To</th>
               <th scope="col">Is_Fulled</th>
               <th scope="col">Edit</th>
               <th scope="col">Details</th>
@@ -42,14 +44,16 @@
               <td scope="row">{{$class['classname']}}</td>
               <td>{{$class['price']}}</td>
               <td>{{Str::Limit($class['description'], 20, '...')}}</td>
+              <td>{{$class['time_From']}}</td>
+              <td>{{$class['time_To']}}</td>
               <td>@if($class['is_fulled']==1) yes @else no @endif</td>
               <td><a href="{{route('class_edit', $class['id'])}}">Edit</a></td>
               <td><a href="{{route('class_show', $class['id'])}}">Details</a></td>
-              <!-- <td><a href="{{route('class_destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td> -->
+              <!-- <td><a href="{{route('class_destroy', $class['id'])}}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td> -->
               <td>
                   <form action= "{{route('class_destroy', $class['id'])}}" method="POST">
                      @csrf
-               @method('DELETE')
+               @method('delete')
            <input type="hidden" name="id" value="{{ $class->id }}" >
              <input type="submit" value="delete" 
              ></td>

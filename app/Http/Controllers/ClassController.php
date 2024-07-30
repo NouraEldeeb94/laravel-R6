@@ -32,31 +32,31 @@ class Classcontroller extends Controller
     public function store(Request $request)
     {
         // dd($request);
+            $data = $request->validate([ 
+                'classname' => 'required|string',
+                'price' => 'required|numeric|min:100',
+                'description'  => 'required|string|max:1000',
+                'time_from' => 'required|date_format:H:i',
+                 'time_to' => 'required|date_format:H:i|after:time_start',
+                 'capacity' => 'required|numeric|min:5',
 
-        // $class_name = 'english';
-        // $price = 10;
-        // $description = "hello my new language";
-        // $capacity = 10;
-        // $is_fulled = true;
-        // $time_from = 12;
-        // $time_to = 1;
+            ]);
 
-        $data = [
-            'classname' => $request->classname,
-            'price' => $request->price,
-            'description' => $request->description,
-            'capacity' => $request->capacity,
-            'is_fulled' => isset($request->is_fulled),
-            // 'time_from' => $request->time_from,
-            // 'time_to' => $request->time_to,
+            $data['is_fulled'] = isset($request->is_fulled);
+                // dd($data);
+            Class1::create($data);
+            return redirect()->route('class_index');
+        // $data = [
+        //     'classname' => $request->classname,
+        //     'price' => $request->price,
+        //     'description' => $request->description,
+        //     'capacity' => $request->capacity,
+        //     'is_fulled' => isset($request->is_fulled),
+        //     // 'time_from' => $request->time_from,
+        //     // 'time_to' => $request->time_to,
 
-        ];
-
-        Class1::create($data);
-
-        return redirect()->route('class_index');
-
-    }
+        // ];
+        }
 
     /**
      * Display the specified resource.
@@ -83,23 +83,31 @@ class Classcontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data = $request->validate([ 
+            'classname' => 'required|string',
+            'price' => 'required|numeric|min:100',
+            'description'  => 'required|string|max:1000',
+            'time_from' => 'required|date_format:H:i',
+             'time_to' => 'required|date_format:H:i|after:time_start',
+             'capacity' => 'required|numeric|min:5',
 
-        // dd($request, $id);
-        $data = [
-            'classname' => $request->classname,
-            'price' => $request->price,
-            'description' => $request->description,
-            'capacity' => $request->capacity,
-            'is_fulled' => isset($request->is_fulled),
-            // 'time_from' => $request->time_from,
-            // 'time_to' => $request->time_to,
-
-        ];
-
+        ]);
+        $data['is_fulled'] = isset($request->is_fulled);
+        // dd($data);
         Class1::where('id', $id)->update($data);
 
         return redirect()->route('class_index');
 
+
+        // dd($request, $id);
+        // $data = [
+        //     'classname' => $request->classname,
+        //     'price' => $request->price,
+        //     'description' => $request->description,
+        //     'time_from' => $request->time_from,
+        //     'time_to' => $request->time_to,
+        //     'capacity' => $request->capacity,
+        //     'is_fulled' => isset($request->is_fulled),
     }
 
     /**
@@ -123,6 +131,21 @@ class Classcontroller extends Controller
            
            return view('trashed_classes', compact('classes'));
         }
+
+        public function restore(string $id) {
+
+            Class1::where('id', $id)->restore();
+            return redirect()->route('class_index');
+
+        }
+
+        public function forcedelete(string $id) {
+
+            Class1::where('id', $id)->forceDelete();
+            return redirect()->route('class_index');
+
+        }
+
 
     }
 

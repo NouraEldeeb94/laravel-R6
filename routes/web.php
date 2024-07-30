@@ -26,7 +26,7 @@ Route::get('/', function () {
 // Route::get('login', function () {
 //     return view('login');
 // })->name('login');
-
+//  Route::prefix('classes')->group(function(){
 Route::get('class_create', [ClassController::class, 'create'])->name('class_create');
 Route::post('class_store', [ClassController::class, 'store'])->name('class_store');
 Route::get('classes', [ClassController::class, 'index'])->name('class_index');
@@ -38,3 +38,8 @@ Route::get('class_details/{id}', [ClassController::class, 'show'])->name('class_
 
 Route::delete('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
 Route::get('class_trashed', [ClassController::class, 'showDeleted'])->name('class_showDeleted');
+Route::patch('class_restore/{id}', [ClassController::class, 'restore'])->name('class_restored');
+
+Route::delete('classes_dd/{id}', [ClassController::class, 'forcedelete'])->name('class_forcedelete');
+
+//  

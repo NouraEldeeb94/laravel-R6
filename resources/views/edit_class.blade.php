@@ -45,15 +45,14 @@
               <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description">{{$class->description}}</textarea>
             </div>
           </div>
-          <hr>
-          <!-- <div class="form-group mb-3 row">
+          <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Time:</label
               >
               <div class="col-md-10">
-                <label for="" class="form-label">From <input type="time" class="form-control" name="time_from"></label>
-                <label for="" class="form-label">To <input type="time" class="form-control"name="time_to"></label>
-              </div> -->
+                <label for="" class="form-label">From <input type="time" class="form-control" name="time_from" value="{$class->time_from}}"></label>
+                <label for="" class="form-label">To <input type="time" class="form-control" name="time_to" value="{$class->time_to}}"></label>
+              </div>
             </div>
             <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"

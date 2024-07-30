@@ -16,9 +16,10 @@ class Class1 extends Model
         'classname',
         'price',
         'description',
+        'time_from',
+        'time_to',
         'capacity',
         'is_fulled',
-        // 'time_from',
-        // 'time_to',
+        
     ];
 }

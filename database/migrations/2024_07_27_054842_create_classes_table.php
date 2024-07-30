@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('classname', 60);
             $table->float('price');
             $table->text('description');
+            $table->time('time_from');
+            $table->time('time_to');
             $table->integer('capacity');
             $table->boolean('is_fulled');
-            // $table->integer('time_from');
-            // $table->integer('time_to');
             $table->softDeletes();
             $table->timestamps();
         });

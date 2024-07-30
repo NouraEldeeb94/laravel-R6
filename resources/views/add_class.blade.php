@@ -29,7 +29,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class_name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="bmw" class="form-control py-2" name="classname"/>
+              <input type="text" placeholder="english" class="form-control py-2" name="classname"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -44,16 +44,15 @@
               <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description"></textarea>
             </div>
           </div>
-          <!-- <hr>
           <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Time:</label
               >
               <div class="col-md-10">
-                <label for="" class="form-label">From <input type="time" class="form-control" name="time_from"></label>
-                <label for="" class="form-label">To <input type="time" class="form-control"name="time_to"></label>
+                <label for="" class="form-label">From <input type="time" class="form-control" name="time_from" value=""></label>
+                <label for="" class="form-label">To <input type="time" class="form-control" name="time_to" value=""></label>
               </div>
-            </div> -->
+            </div>
             <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Capacity:</label
