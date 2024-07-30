@@ -1,179 +1,40 @@
 <?php
 
-use App\Http\Controllers\carController;
-use App\Http\Controllers\ClassController;
-use App\Http\Controllers\exampleController;
 use Illuminate\Support\Facades\Route;
+use  App\Http\Controllers\ClassController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/welcome', function () {
-    return "welcome to our site";
-})->name('w');
+// Route::get('add_car', [CarController::class, 'index'])->name('add_car');
 
-Route::get('/link', function () {
-    $url = route('w');
-    return "<a href='$url'> go to welcome page </a>";
-});
+// Route::get('cars', function () {
+//     return view('cars');
+// })->name('cars');
 
-Route::get('/login', function () {
-    return view('login');
-});
-Route::post('/login_accepted', function () {
-    return "submit successfully";
-})->name('login_accepted');
+// Route::post('cars', function () {
+//     return view('cars');
+// })->name('cars');
 
-Route::get('/cv', function () {
-    return view('cv');
-});
+// Route::get('portfolio', function () {
+//     return view('portfolio');
+// })->name('portfolio');
 
-#for task3
-#the task is to send the form data to another page
-#and to show the data in a proper format
-#begin
-Route::get('/contactUs_task3', function () {
-    return view('task3_contactUs');
-});
+// Route::get('login', function () {
+//     return view('login');
+// })->name('login');
 
-Route::post('/submit_Page', function () {
-    return view('task3_response', $_POST);
-})->name('submit_Page');
-#end
+Route::get('class_create', [ClassController::class, 'create'])->name('class_create');
+Route::post('class_store', [ClassController::class, 'store'])->name('class_store');
+Route::get('classes', [ClassController::class, 'index'])->name('class_index');
+Route::get('class_edit/{id}', [ClassController::class, 'edit'])->name('class_edit');
+Route::put('class_update/{id}', [ClassController::class, 'update'])->name('class_update');
+Route::get('class_details/{id}', [ClassController::class, 'show'])->name('class_show');
 
-Route::get('test', [exampleController::class, 'my_data']);
-Route::get('car/create', [carController::class, 'create']);
-Route::post('cars', [carController::class, 'store'])->name('car.store');
+// Route::get('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
 
-#for task4
-#the task is to save the class data in the database
-#using controller and Model
-#begin
-Route::get('class/create', [ClassController::class, 'create']);
-Route::post('classes', [ClassController::class, 'store'])->name('class.store');
-#end
-
-Route::get('cars', [CarController::class, 'index'])->name('cars.index');
-Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit')->whereNumber('id');
-Route::post('cars/{id}', [CarController::class, 'update'])->name('cars.update');
-Route::get('cars/show/{id}', [CarController::class, 'show'])->name('cars.show');
-Route::get('cars/destroy/{id}', [CarController::class, 'destroy'])->name('cars.destroy');
-Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
-
-#task5
-#begin
-Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
-Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit')->whereNumber('id');
-#end
-
-#task6
-#begin
-Route::get('classes/{id}/show', [ClassController::class, 'show'])->name('classes.show')->whereNumber('id');
-Route::delete('classes/delete', [ClassController::class, 'destroy'])->name('classes.destroy');
-Route::put('classes/{id}/', [ClassController::class, 'update'])->name('classes.update')->whereNumber('id');
-Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
-#end
-
-/* Route::get('/submit_page', function () {
-return "submi";
-})->name('submit_page'); */
-
-/* Route::get('/cars/{id?}', function ($id=0) {
-return "the cars is number ".$id;
-})->where([
-'id'=>'[0-9]+'
-]); */
-
-/* Route::get('/cars/{id?}', function ($id = 0) {
-return "the cars is number " . $id;
-})->whereNumber('id'); */
-
-/* Route::get('user/{name}/{age}', function($name, $age){
-return "Username is " . $name . " and age is " . $age;
-})->where(['name'=>'[a-zA-Z]+','age'=>'[0-9]+']); */
-
-# return ($age == 0)? "Username is " . $name: "Username is " . $name . " and age is " . $age
-
-/* Route::get('user/{name}/{age?}', function ($name, $age = 0) {
-if ($age == 0) {
-return "Username is " . $name;
-} else {
-return "Username is " . $name . " and age is " . $age;
-}
-})->where(['name' => '[a-zA-Z]+', 'age' => '[0-9]+']);
-
-Route::get('data/{month}/', function ($month) {
-return 'The month is ' . $month;
-})->whereIn('month', ['March', 'April', 'May']);
-
-Route::prefix('company')->group(function()
-{
-Route::get('/', function () {
-return "index";
-});
-
-Route::get('/IT', function () {
-return "welcome to IT";
-});
-
-Route::get('/users', function () {
-return "welcome to users";
-});
-
-});
-
- */
-/* Route::prefix('accounts')->group(function () {
-Route::get('/', function () {
-return "welcome to index";
-});
-
-Route::get('/admin', function () {
-return "welcome to admin";
-});
-
-Route::get('/user', function () {
-return "welcome to user";
-});
-
-});
-
-Route::prefix('cars')->group(function () {
-Route::get('/', function () {
-return "welcome to cars";
-});
-
-Route::prefix('usa')->group(function () {
-
-Route::get('/ford', function () {
-return "welcome to usa ford";
-});
-
-Route::get('/tesla', function () {
-return "welcome to usa tesla";
-});
-
-});
-
-Route::prefix('ger')->group(function () {
-
-Route::get('/mercedes', function () {
-return "welcome to ger mercedes";
-});
-
-Route::get('/audi', function () {
-return "welcome to ger audi";
-});
-
-Route::get('/volkswagen', function () {
-return "welcome to ger volkswagen";
-});
-
-});
-
-});
- */
-/* Route::fallback(function () {
-return redirect('/welcome');
-}); */
+Route::delete('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
+Route::get('class_trashed', [ClassController::class, 'showDeleted'])->name('class_showDeleted');

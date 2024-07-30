@@ -23,35 +23,41 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Classes</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All Classes</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
               <th scope="col">Class Name</th>
               <th scope="col">Price</th>
-              <th scope="col">Capacity</th>
-              <th scope="col">Time From</th>
-              <th scope="col">Time To</th>
-              <th scope="col">Is Full</th>
-              <th scope="col">Show</th>
+              <th scope="col">Description</th>
+              <th scope="col">Is_Fulled</th>
               <th scope="col">Edit</th>
-              <th scope="col">Permanent Delete</th>
+              <th scope="col">Details</th>
+              <th scope="col">permenant Delete</th>
             </tr>
           </thead>
           <tbody>
-          @foreach($classes as $class_)
+            @foreach($classes as $class)
             <tr>
-              <td scope="row">{{$class_['class_name']}}</td>
-              <td>{{$class_['price']}}</td>
-              <td>{{$class_['capacity']}}</td>
-              <td>{{$class_['time_From']}}</td>
-              <td>{{$class_['time_to']}}</td>
-              <td>{{$class_['is_fulled']?'YES':'NO'}}</td>
-              <td><a href="{{route('classes.show',$class_['id'])}}">show</a></td>
-              <td><a href="{{route('classes.edit',$class_['id'])}}">edit</a></td>
-              <td><a href="" onclick="return checkDelete()">permanent delete</a></td>
+              <td scope="row">{{$class['classname']}}</td>
+              <td>{{$class['price']}}</td>
+              <td>{{Str::Limit($class['description'], 20, '...')}}</td>
+              <td>@if($class['is_fulled']==1) yes @else no @endif</td>
+              <td><a href="{{route('class_edit', $class['id'])}}">Edit</a></td>
+              <td><a href="{{route('class_show', $class['id'])}}">Details</a></td>
+              <!-- <td><a href="{{route('class_destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td> -->
+              <td>
+                  <form action= "{{route('class_destroy', $class['id'])}}" method="POST">
+                     @csrf
+               @method('DELETE')
+           <input type="hidden" name="id" value="{{ $class->id }}" >
+             <input type="submit" value="delete" 
+             ></td>
+             </form>
+            </td>
             </tr>
-          @endforeach
+            <tr>
+              @endforeach
           </tbody>
         </table>
       </div>

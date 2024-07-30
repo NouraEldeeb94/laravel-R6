@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('class_name');
+            $table->string('classname', 60);
+            $table->float('price');
+            $table->text('description');
             $table->integer('capacity');
             $table->boolean('is_fulled');
-            $table->decimal('price');
-            $table->dateTime('time_From');
-            $table->dateTime('time_to');
+            // $table->integer('time_from');
+            // $table->integer('time_to');
             $table->softDeletes();
             $table->timestamps();
         });

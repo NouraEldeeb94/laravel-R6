@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classes;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Class1;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class Classcontroller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $classes = Classes::get();
+        //
+        $classes = Class1::get();
+
         return view('classes', compact('classes'));
     }
 
@@ -30,17 +31,31 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        Classes::create([
-            'class_name' => $request['class_name'],
-            'capacity' => $request['capacity'],
-            'is_fulled' => $request['is_fulled'] == "on" ? true : false,
-            'price' => $request['price'],
-            'time_From' => $request['time_From'],
-            'time_to' => $request['time_to'],
+        // dd($request);
 
-        ]);
+        // $class_name = 'english';
+        // $price = 10;
+        // $description = "hello my new language";
+        // $capacity = 10;
+        // $is_fulled = true;
+        // $time_from = 12;
+        // $time_to = 1;
 
-        return redirect()->route('classes.index');
+        $data = [
+            'classname' => $request->classname,
+            'price' => $request->price,
+            'description' => $request->description,
+            'capacity' => $request->capacity,
+            'is_fulled' => isset($request->is_fulled),
+            // 'time_from' => $request->time_from,
+            // 'time_to' => $request->time_to,
+
+        ];
+
+        Class1::create($data);
+
+        return redirect()->route('class_index');
+
     }
 
     /**
@@ -48,7 +63,8 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        $class = Classes::findOrFail($id);
+        //
+        $class = Class1::findOrFail($id);
         return view('class_details', compact('class'));
     }
 
@@ -57,7 +73,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        $class = Classes::findOrFail($id);
+        //
+        $class = Class1::findOrFail($id);
         return view('edit_class', compact('class'));
     }
 
@@ -66,32 +83,46 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        // dd($request, $id);
         $data = [
-            'class_name' => $request['class_name'],
-            'capacity' => $request['capacity'],
-            'is_fulled' => $request['is_fulled'] == "on" ? true : false,
-            'price' => $request['price'],
-            'time_From' => $request['time_From'],
-            'time_to' => $request['time_to'],
+            'classname' => $request->classname,
+            'price' => $request->price,
+            'description' => $request->description,
+            'capacity' => $request->capacity,
+            'is_fulled' => isset($request->is_fulled),
+            // 'time_from' => $request->time_from,
+            // 'time_to' => $request->time_to,
 
         ];
-        Classes::where('id', $id)->update($data);
 
-        return redirect()->route('classes.index');
+        Class1::where('id', $id)->update($data);
+
+        return redirect()->route('class_index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request):RedirectResponse
+    public function destroy(Request $request, string $id)
     {
-        Classes::where('id', $request['id'])->delete();
-        return redirect()->route('classes.index');
+        // Class1::where('id', $id)->delete();
+        // return "data_deleted";
+
+        $id = $request->id;
+
+        Class1::where('id', $id)->delete();
+
+        return redirect()->route('class_index');
     }
-    public function showDeleted()
-    {
-        $classes = Classes::onlyTrashed()->get();
-        return view('trashed_classes', compact('classes'));
+
+        public function showDeleted() {
+
+           $classes = Class1::onlyTrashed()->get();
+           
+           return view('trashed_classes', compact('classes'));
+        }
 
     }
-}
+

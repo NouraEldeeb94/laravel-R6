@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,48 +24,57 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('class.store')}}" method="POST" class="px-md-5">
-        @csrf 
+        <form action="{{route('class_store')}}" method="POST" class="px-md-5">
+          @csrf
           <div class="form-group mb-3 row">
-            <label for="class_name" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Class_name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="class name" class="form-control py-2" name="class_name" />
+              <input type="text" placeholder="bmw" class="form-control py-2" name="classname"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="capacity" class="form-label col-md-2 fw-bold text-md-end">Capacity:</label>
-            <div class="col-md-10">
-              <input type="number" step="1" placeholder="Enter capacity" class="form-control py-2" name="capacity" />
-            </div>
-          </div>
-          <div class="form-group mb-3 row">
-            <label for="price" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
               <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" />
             </div>
           </div>
-          <hr>
           <div class="form-group mb-3 row">
-            <label for="time_From" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <input type="datetime-local" class="form-control py-2" name="time_From" />
+              <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description"></textarea>
             </div>
           </div>
+          <!-- <hr>
           <div class="form-group mb-3 row">
-            <label for="time_to" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
-            <div class="col-md-10">
-              <input type="datetime-local" class="form-control py-2" name="time_to" />
+              <label for="" class="form-label col-md-2 fw-bold text-md-end"
+                >Time:</label
+              >
+              <div class="col-md-10">
+                <label for="" class="form-label">From <input type="time" class="form-control" name="time_from"></label>
+                <label for="" class="form-label">To <input type="time" class="form-control"name="time_to"></label>
+              </div>
+            </div> -->
+            <div class="form-group mb-3 row">
+              <label for="" class="form-label col-md-2 fw-bold text-md-end"
+                >Capacity:</label
+              >
+              <div class="col-md-10">
+                <input
+                  type="number"
+                  step="1"
+                  placeholder="Enter catpacity"
+                  class="form-control py-2" name="capacity"
+                />
+              </div>
             </div>
-          </div>
-          <hr>
           <div class="form-group mb-3 row">
-            <label for="is_fulled" class="form-label col-md-2 fw-bold text-md-end">Is fulled:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Is_Fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="is_fulled" />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="is_fulled"/>
             </div>
           </div>
           <div class="text-md-end">
-            <button type="submit" class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
+            <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
               Add Class
             </button>
           </div>
