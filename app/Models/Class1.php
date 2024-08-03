@@ -20,6 +20,8 @@ class Class1 extends Model
         'time_to',
         'capacity',
         'is_fulled',
+        'image',
+
         
     ];
 }

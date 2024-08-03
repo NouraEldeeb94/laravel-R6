@@ -31,6 +31,9 @@ class Classcontroller extends Controller
      */
     public function store(Request $request)
     {
+       
+           
+        
         // dd($request);
             $data = $request->validate([ 
                 'classname' => 'required|string',
@@ -38,24 +41,28 @@ class Classcontroller extends Controller
                 'description'  => 'required|string|max:1000',
                 'time_from' => 'required|date_format:H:i',
                  'time_to' => 'required|date_format:H:i|after:time_start',
-                 'capacity' => 'required|numeric|min:5',
+                 'capacity' => 'required|integer|min:5',
+                 'image'  => 'required|mimes:png,jpg,jpeg|max:2048',
+                
+
 
             ]);
 
             $data['is_fulled'] = isset($request->is_fulled);
-                // dd($data);
+           
+            
+            $file_extension = $request->image->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'assets/images';
+            $request->image->move($path, $file_name);
+            $data['image']= $file_name;
+            
             Class1::create($data);
             return redirect()->route('class_index');
-        // $data = [
-        //     'classname' => $request->classname,
-        //     'price' => $request->price,
-        //     'description' => $request->description,
-        //     'capacity' => $request->capacity,
-        //     'is_fulled' => isset($request->is_fulled),
-        //     // 'time_from' => $request->time_from,
-        //     // 'time_to' => $request->time_to,
-
-        // ];
+                // dd($data);
+           
+         
+            return 'Uploaded';
         }
 
     /**
@@ -89,11 +96,20 @@ class Classcontroller extends Controller
             'description'  => 'required|string|max:1000',
             'time_from' => 'required|date_format:H:i',
              'time_to' => 'required|date_format:H:i|after:time_start',
-             'capacity' => 'required|numeric|min:5',
+             'capacity' => 'required|integer|min:5',
+            //  'image'  => 'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
         $data['is_fulled'] = isset($request->is_fulled);
+        
         // dd($data);
+
+        // $file_extension = $request->image->getClientOriginalExtension();
+        // $file_name = time() . '.' . $file_extension;
+        // $path = 'assets/images';
+        // $request->image->move($path, $file_name);
+        // $data['image']= $file_name;
+        
         Class1::where('id', $id)->update($data);
 
         return redirect()->route('class_index');

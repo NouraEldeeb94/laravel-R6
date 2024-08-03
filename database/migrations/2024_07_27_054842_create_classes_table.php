@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('time_to');
             $table->integer('capacity');
             $table->boolean('is_fulled');
+            $table->string('image');
             $table->softDeletes();
             $table->timestamps();
         });

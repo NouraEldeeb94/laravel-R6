@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\ClassController;
+use  App\Http\Controllers\ExampleController;
+
+
 
 
 
@@ -43,3 +46,6 @@ Route::patch('class_restore/{id}', [ClassController::class, 'restore'])->name('c
 Route::delete('classes_dd/{id}', [ClassController::class, 'forcedelete'])->name('class_forcedelete');
 
 //  
+Route::get('upload_image', [ExampleController::class, 'uploadform']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image');
+

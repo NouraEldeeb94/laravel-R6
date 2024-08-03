@@ -44,8 +44,8 @@
               <td scope="row">{{$class['classname']}}</td>
               <td>{{$class['price']}}</td>
               <td>{{Str::Limit($class['description'], 20, '...')}}</td>
-              <td>{{$class['time_From']}}</td>
-              <td>{{$class['time_To']}}</td>
+              <td>{{ date('H:i', strtotime($class['time_From']))}}</td>
+              <td>{{ date('H:i', strtotime($class['time_From']))}}</td>
               <td>@if($class['is_fulled']==1) yes @else no @endif</td>
               <td><a href="{{route('class_edit', $class['id'])}}">Edit</a></td>
               <td><a href="{{route('class_show', $class['id'])}}">Details</a></td>
