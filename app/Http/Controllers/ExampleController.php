@@ -19,4 +19,10 @@ class ExampleController extends Controller
         $request->image->move($path, $file_name);
         return 'Uploaded';
     }
+
+    public function index() {
+
+        return view('fashion_index');
+    }
 }
+

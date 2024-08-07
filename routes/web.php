@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\ClassController;
 use  App\Http\Controllers\ExampleController;
+use  App\Http\Controllers\ProductsController;
+
 
 
 
@@ -48,4 +50,15 @@ Route::delete('classes_dd/{id}', [ClassController::class, 'forcedelete'])->name(
 //  
 Route::get('upload_image', [ExampleController::class, 'uploadform']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image');
+
+Route::get('fashion-index', [ExampleController::class, 'index']);
+
+// products
+
+Route::get('create_product', [ProductsController::class, 'create'])->name('create_product');
+Route::post('product_store', [ProductsController::class, 'store'])->name('product_store');
+Route::get('fashion_index', [ProductsController::class, 'index'])->name('fashion_index');
+
+
+
 
