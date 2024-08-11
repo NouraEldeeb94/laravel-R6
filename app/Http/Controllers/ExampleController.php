@@ -37,7 +37,10 @@ class ExampleController extends Controller
 
             public function product() {
 
-                return view('all_products');
+                
+                $products = product::get();
+
+                return view('all_products', compact('products'));
             }
 
     
