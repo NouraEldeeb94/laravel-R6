@@ -16,10 +16,12 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = product::limit(3)->get();
+        $products = product::latest()->limit(3)->get();
 
-        return view('fashion_index', compact('products'));
+        return view('index', compact('products'));
     }
+
+   
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +50,7 @@ class ProductsController extends Controller
         $data['published'] = isset($request->published);
 
         Product::create($data);
-        return redirect()->route('fashion_index');
+        return redirect()->route('fashion_index ');
         // dd($data);
     }
 
@@ -58,6 +60,8 @@ class ProductsController extends Controller
     public function show(string $id)
     {
         //
+        $product = Product::findOrFail($id);
+        return view('products', compact('product'));
     }
 
     /**
@@ -65,7 +69,9 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        $product = Product::findOrFail($id);
+        return view('edit_product', compact('product'));
     }
 
     /**
@@ -73,7 +79,23 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string',
+            'price' => 'required|numeric|min:100',
+            'description' => 'required|string|max:1000',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+
+        ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadfile($request->image, 'assets/images');
+        }
+
+        $data['published'] = isset($request->published);
+
+        Product::where('id', $id)->update($data);
+
+        return redirect()->route('fashion_index');
+        
     }
 
     /**

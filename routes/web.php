@@ -51,14 +51,19 @@ Route::delete('classes_dd/{id}', [ClassController::class, 'forcedelete'])->name(
 Route::get('upload_image', [ExampleController::class, 'uploadform']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image');
 
-Route::get('fashion-index', [ExampleController::class, 'index']);
+// Route::get('fashion-index', [ExampleController::class, 'index']);
 
 // products
 
 Route::get('create_product', [ProductsController::class, 'create'])->name('create_product');
 Route::post('product_store', [ProductsController::class, 'store'])->name('product_store');
-Route::get('fashion_index', [ProductsController::class, 'index'])->name('fashion_index');
+Route::get('index', [ProductsController::class, 'index'])->name('fashion_index');
+Route::get('edit_product/{id}', [ProductsController::class, 'edit'])->name('product_edit');
+Route::put('product_update/{id}', [ProductsController::class, 'update'])->name('product_update');
 
+// Route::get('allproducts', [ExampleController::class, 'index']);
+Route::get('about', [ExampleController::class, 'about']);
+Route::get('products', [ExampleController::class, 'product']);
 
 
 
