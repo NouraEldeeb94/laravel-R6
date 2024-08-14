@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\ClassController;
 use  App\Http\Controllers\ExampleController;
@@ -57,7 +58,7 @@ Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image'
 
 Route::get('create_product', [ProductsController::class, 'create'])->name('create_product');
 Route::post('product_store', [ProductsController::class, 'store'])->name('product_store');
-Route::get('index', [ProductsController::class, 'index'])->name('fashion_index');
+Route::get('index', [ProductsController::class, 'index'])->name('product_index');
 Route::get('edit_product/{id}', [ProductsController::class, 'edit'])->name('product_edit');
 Route::put('product_update/{id}', [ProductsController::class, 'update'])->name('product_update');
 
@@ -65,5 +66,19 @@ Route::put('product_update/{id}', [ProductsController::class, 'update'])->name('
 Route::get('about', [ExampleController::class, 'about']);
 Route::get('products', [ExampleController::class, 'product']);
 
+
+Route::get('test', [ExampleController::class, 'test']);
+
+Route::get('add_car', [CarController::class, 'create'])->name('car_create');
+Route::get('cars', [CarController::class, 'index'])->name('car_index');
+Route::post('cars_store', [CarController::class, 'store'])->name('car_store');
+Route::get('car_edit/{id}', [CarController::class, 'edit'])->name('car_edit');
+Route::put('car_update/{id}', [CarController::class, 'update'])->name('car_update');
+Route::get('car_details/{id}', [CarController::class, 'show'])->name('car_show');
+
+// one to many relationship
+
+Route::get('car_test', [ExampleController::class, 'car']);
+Route::get('cat', [ExampleController::class, 'cat']);
 
 

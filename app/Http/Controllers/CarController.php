@@ -3,33 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Car;
 use App\Traits\Common;
+use App\Models\Category;
 
-class ProductsController extends Controller
+
+class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    use Common;
 
-     use Common;
 
     public function index()
     {
-        $products = product::latest()->limit(3)->get();
+        $cars = Car::get();
 
-        return view('index', compact('products'));
+        return view('cars', compact('cars'));
     }
-
-   
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
-        return view('add_product');
+        $categories = Category::all();
+        return view('add_car', compact('categories'));
+        
     }
 
     /**
@@ -37,21 +36,26 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric|min:100',
-            'description' => 'required|string|max:1000',
+            'category_name' => 'nullable|exists:categories,id',
+            'description' => 'nullable|string|max:1000',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
 
-        $data['image'] = $this->uploadfile($request->image, 'assets/images');
+        $data['image'] = $this->uploadfile($request->image, 'assets/images/cars');
         $data['published'] = isset($request->published);
 
-        Product::create($data);
-        return redirect()->route('product_index');
+        Car::create($data);
+        return redirect()->route('car_index');
         // dd($data);
+
+        // $cars->categories()->create($data);
+
+        // return redirect('cars')->with('success', 'Ticket Successfully Created for Flight ' . $car->catewgory_name);
+        // return 'Uploaded';
     }
 
     /**
@@ -60,8 +64,6 @@ class ProductsController extends Controller
     public function show(string $id)
     {
         //
-        $product = Product::findOrFail($id);
-        return view('products', compact('product'));
     }
 
     /**
@@ -69,9 +71,8 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        
-        $product = Product::findOrFail($id);
-        return view('edit_product', compact('product'));
+        $car = Car::findOrFail($id);
+        return view('edit_car', compact('car'));
     }
 
     /**
@@ -82,20 +83,22 @@ class ProductsController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric|min:100',
+            'category_name' => 'nullable|exists:categories,id',
             'description' => 'required|string|max:1000',
             'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
 
         ]);
+
+        // dd($data);
         if ($request->hasFile('image')) {
-            $data['image'] = $this->uploadfile($request->image, 'assets/images');
+            $data['image'] = $this->uploadfile($request->image, 'assets/images/cars');
         }
 
         $data['published'] = isset($request->published);
 
-        Product::where('id', $id)->update($data);
+        Car::where('id', $id)->update($data);
 
-        return redirect()->route('product_index');
-        
+        return redirect()->route('car_index');
     }
 
     /**

@@ -27,24 +27,26 @@
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car Title</th>
+              <th scope="col">Car_Title</th>
               <th scope="col">Price</th>
+              <th scope="col">Category</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Details</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
+          @foreach($cars as $car)
             <tr>
-              <td scope="row">BMW</td>
-              <td>120000</td>
-              <td>test test test ...</td>
-              <td>YES</td>
-            </tr>
-            <tr>
-              <td scope="row">BMW</td>
-              <td>120000</td>
-              <td>test test test ...</td>
-              <td>YES</td>
+              <td scope="row">{{$car['title']}}</td>
+              <td>{{$car['price']}}</td>
+              <td>{{$car['category']}}</td>
+              <td>{{Str::Limit($car['description'], 20, '...')}}</td>
+              <td>@if($car['Published']==1) yes @else no @endif</td>
+              <td><a href="{{route('car_edit', $car['id'])}}">Edit</a></td>
+              <td><a href="{{route('car_show', $car['id'])}}">Details</a></td>
             </tr>
           </tbody>
         </table>

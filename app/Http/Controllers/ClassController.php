@@ -44,7 +44,7 @@ class Classcontroller extends Controller
 
         ]);
 
-        $data['image'] = $this->uploadfile($request->image, 'assets/images');
+        $data['image'] = $this->uploadfile($request->image, 'assets/images/cars');
         $data['is_fulled'] = isset($request->is_fulled);
 
         Class1::create($data);

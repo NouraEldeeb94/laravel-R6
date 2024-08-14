@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>Edit Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,13 +23,14 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
-        <form action="{{route('car_store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
+        <h2 class="fw-bold fs-2 mb-5 pb-2">edit Car</h2>
+        <form action="{{route('car_update', $car->id)}}" method="post" enctype="multipart/form-data" class="px-md-5">
           @csrf
+          @method('put')
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Class_name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="title" value="{{old('title')}}"/>
+              <input type="text" placeholder="english" class="form-control py-2"  name="title" value="{{old('title', $car->title)}}"/>
               @error('title')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
@@ -38,7 +39,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
+              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price', $car->price)}}"/>
               @error('price')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
@@ -48,26 +49,33 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
               <select name="" id="" class="form-control">
-              @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                @endforeach
+                @if
+                <option value="{{$category->id}}" selected>{{old('category'->category_name)}}</option>
+                @endif
                 <option value="">Select Category</option>
               </select>
-              @error('category_name')
+              @error('category')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-            </div>
+          </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea name="" id="" cols="30" rows="5" class="form-control py-2" ame="description">{{old('description', 'test')}}</textarea>
+              <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description', $car->description)}}
+              </textarea>
               @error('description')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
-          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published</label>
+            <div class="col-md-10">
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" @checked(old('published',$car->published))/>
+            </div>
+          </div>
+          <hr>
+            <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Image:</label
               >
@@ -75,23 +83,18 @@
                 <input
                   type="file"
                   class="form-control"
-                  style="padding: 0.7rem;" name="image"
+                  style="padding: 0.7rem;" name="image" value="{{$car->image}}"
                 />
               </div>
               @error('image')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
+               <img src="{{asset('assets/images/cars/' .$car->image)}}"
+                alt="" class="card-img">
             </div>
-          <hr>
-          <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
-            <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))  />
-            </div>
-          </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-              Add Car
+              Edit car
             </button>
           </div>
         </form>
