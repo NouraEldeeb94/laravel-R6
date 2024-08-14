@@ -26,7 +26,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::select('id', 'category_name')->get();
         return view('add_car', compact('categories'));
         
     }
@@ -39,8 +39,8 @@ class CarController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric|min:100',
-            'category_name' => 'nullable|exists:categories,id',
-            'description' => 'nullable|string|max:1000',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'required|string|max:1000',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
@@ -71,6 +71,7 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+        $categories = Category::select('id', 'category_name')->get();
         $car = Car::findOrFail($id);
         return view('edit_car', compact('car'));
     }
@@ -83,7 +84,7 @@ class CarController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric|min:100',
-            'category_name' => 'nullable|exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string|max:1000',
             'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
 

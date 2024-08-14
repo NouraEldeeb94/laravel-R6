@@ -47,26 +47,25 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
-              <select name="" id="" class="form-control">
-              @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                @endforeach
+              <select name="category_id" id="" class="form-control">
                 <option value="">Select Category</option>
+                @foreach($categories as $category)
+                <option value="{{$categories->id}}">{{$category->category_name}}</option>
+                @endforeach
               </select>
-              @error('category_name')
+              @error('category_id')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-            </div>
-          <div class="form-group mb-3 row">
+            <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea name="" id="" cols="30" rows="5" class="form-control py-2" ame="description">{{old('description', 'test')}}</textarea>
+              <textarea id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description')}}</textarea>
               @error('description')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-          </div>
+
           <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Image:</label

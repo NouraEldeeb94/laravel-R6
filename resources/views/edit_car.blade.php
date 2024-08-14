@@ -48,13 +48,13 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
-              <select name="" id="" class="form-control">
+              <select name="category_id" id="" class="form-control">
                 @if
                 <option value="{{$category->id}}" selected>{{old('category'->category_name)}}</option>
                 @endif
                 <option value="">Select Category</option>
               </select>
-              @error('category')
+              @error('category_id')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
