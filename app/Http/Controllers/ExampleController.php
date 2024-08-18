@@ -7,6 +7,9 @@ use App\Models\Product;
 use App\Models\Student;
 use App\Models\Car;
 use App\Models\Category;
+use Faker\Guesser\Name;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
 {
@@ -78,6 +81,28 @@ public function cat(string $id)
     }
 
 
+    
+    public function contact() {
+        return view('contact_us');
+
+}
+
+public function send() {
+   $data = request()->validate([
+        'name' => 'required|string|max:30',
+        'email' => 'required|email|max:50',
+        'subject' => 'required|string|max:80',
+        'message' => 'required|string|max:100',
+    ]);
+
+    
+Mail::to(request('email'))->send(new OrderShipped($data));
+return back();
+
+   
+
+    
+}
 
 
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>All Cars</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,6 @@
             <tr class="table-dark">
               <th scope="col">Car_Title</th>
               <th scope="col">Price</th>
-              <th scope="col">Category</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
               <th scope="col">Edit</th>
@@ -38,16 +37,22 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($cars as $car)
+            @foreach($cars as $car)
             <tr>
-              <td scope="row">{{$car['title']}}</td>
+              <td scope="row">{{$car['car_title']}}</td>
               <td>{{$car['price']}}</td>
-              <td>{{$car['category']}}</td>
               <td>{{Str::Limit($car['description'], 20, '...')}}</td>
-              <td>@if($car['Published']==1) yes @else no @endif</td>
+              <td>@if($car['published']==1) yes @else no @endif</td>
               <td><a href="{{route('car_edit', $car['id'])}}">Edit</a></td>
               <td><a href="{{route('car_show', $car['id'])}}">Details</a></td>
+
+              <td>
+             </td>
+             </form>
+            </td>
             </tr>
+            <tr>
+              @endforeach
           </tbody>
         </table>
       </div>

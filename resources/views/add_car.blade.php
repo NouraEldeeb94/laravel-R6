@@ -27,10 +27,10 @@
         <form action="{{route('car_store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car_name</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="title" value="{{old('title')}}"/>
-              @error('title')
+              <input type="text" placeholder="english" class="form-control py-2" name="car_title" value="{{old('car_title')}}"/>
+              @error('car_title')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
@@ -43,30 +43,32 @@
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-          </div>
-          <div class="form-group mb-3 row">
+            </div>
+            <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
               <select name="category_id" id="" class="form-control">
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
-                <option value="{{$categories->id}}">{{$category->category_name}}</option>
+                <option value="{{$category->id}}"@selected(old('category_id', $car->category|_id)==$category->id)>{{$category->category_name}}</option>
                 @endforeach
               </select>
               @error('category_id')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-            <div class="form-group mb-3 row">
+          </div>
+          <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description')}}</textarea>
+              <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description', 'test')}}</textarea>
               @error('description')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-
-          <div class="form-group mb-3 row">
+            </div>
+            <hr>
+            <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Image:</label
               >
@@ -81,11 +83,10 @@
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
-          <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))  />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('is_fulled')) />
             </div>
           </div>
           <div class="text-md-end">

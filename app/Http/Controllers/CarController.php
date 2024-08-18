@@ -27,7 +27,8 @@ class CarController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'category_name')->get();
-        return view('add_car', compact('categories'));
+        return view('add_car', compact('categories'));  
+        
         
     }
 
@@ -37,7 +38,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string',
+            'car_title' => 'required|string',
             'price' => 'required|numeric|min:100',
             'category_id' => 'required|exists:categories,id',
             'description' => 'required|string|max:1000',
@@ -52,10 +53,7 @@ class CarController extends Controller
         return redirect()->route('car_index');
         // dd($data);
 
-        // $cars->categories()->create($data);
-
-        // return redirect('cars')->with('success', 'Ticket Successfully Created for Flight ' . $car->catewgory_name);
-        // return 'Uploaded';
+        
     }
 
     /**

@@ -9,17 +9,18 @@ class Car extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
+        'car_title',
         'price',
+        'category_id',
         'description',
         'published',
         'image',
-        'category_id',
+       
 
         
     ];
 
-    public function category() {
-        return $this->belongsTo(Category::class);
-    }
+    // public function category() {
+    //     return $this->belongsTo(Category::class);
+    // }
 }

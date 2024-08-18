@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // Product::factory(100)->create();
 
           // User::factory(10)->create();
-          Car::factory(10)->create();
+          // Car::factory(10)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',

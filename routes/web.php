@@ -3,82 +3,85 @@
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\ClassController;
+use App\Http\Controllers\ContactController;
 use  App\Http\Controllers\ExampleController;
 use  App\Http\Controllers\ProductsController;
-
-
-
-
-
+use phpDocumentor\Reflection\DocBlock\ExampleFinder;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('add_car', [CarController::class, 'index'])->name('add_car');
 
-// Route::get('cars', function () {
-//     return view('cars');
-// })->name('cars');
+ Route::prefix('classes')->group(function(){
+Route::get('create', [ClassController::class, 'create'])->name('class_create');
+Route::post('store', [ClassController::class, 'store'])->name('class_store');
+Route::get('/', [ClassController::class, 'index'])->name('class_index');
+Route::get('edit/{id}', [ClassController::class, 'edit'])->name('class_edit');
+Route::put('update/{id}', [ClassController::class, 'update'])->name('class_update');
+Route::get('details/{id}', [ClassController::class, 'show'])->name('class_show');
+Route::delete('delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
+Route::get('trashed', [ClassController::class, 'showDeleted'])->name('class_showDeleted');
+Route::patch('restore/{id}', [ClassController::class, 'restore'])->name('class_restored');
+Route::delete('dd/{id}', [ClassController::class, 'forcedelete'])->name('class_forcedelete');
+Route::get('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
 
-// Route::post('cars', function () {
-//     return view('cars');
-// })->name('cars');
+ });
 
-// Route::get('portfolio', function () {
-//     return view('portfolio');
-// })->name('portfolio');
 
-// Route::get('login', function () {
-//     return view('login');
-// })->name('login');
-//  Route::prefix('classes')->group(function(){
-Route::get('class_create', [ClassController::class, 'create'])->name('class_create');
-Route::post('class_store', [ClassController::class, 'store'])->name('class_store');
-Route::get('classes', [ClassController::class, 'index'])->name('class_index');
-Route::get('class_edit/{id}', [ClassController::class, 'edit'])->name('class_edit');
-Route::put('class_update/{id}', [ClassController::class, 'update'])->name('class_update');
-Route::get('class_details/{id}', [ClassController::class, 'show'])->name('class_show');
 
-// Route::get('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
 
-Route::delete('class_delete/{id}', [ClassController::class, 'destroy'])->name('class_destroy');
-Route::get('class_trashed', [ClassController::class, 'showDeleted'])->name('class_showDeleted');
-Route::patch('class_restore/{id}', [ClassController::class, 'restore'])->name('class_restored');
 
-Route::delete('classes_dd/{id}', [ClassController::class, 'forcedelete'])->name('class_forcedelete');
+// routes of products
 
-//  
-Route::get('upload_image', [ExampleController::class, 'uploadform']);
-Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image');
-
-// Route::get('fashion-index', [ExampleController::class, 'index']);
-
-// products
-
-Route::get('create_product', [ProductsController::class, 'create'])->name('create_product');
-Route::post('product_store', [ProductsController::class, 'store'])->name('product_store');
+Route::prefix('product')->middleware('verified')->group(function(){
+Route::get('create', [ProductsController::class, 'create'])->name('create_product');
+Route::post('store', [ProductsController::class, 'store'])->name('product_store');
 Route::get('index', [ProductsController::class, 'index'])->name('product_index');
-Route::get('edit_product/{id}', [ProductsController::class, 'edit'])->name('product_edit');
-Route::put('product_update/{id}', [ProductsController::class, 'update'])->name('product_update');
+Route::get('edit/{id}', [ProductsController::class, 'edit'])->name('product_edit');
+Route::put('update/{id}', [ProductsController::class, 'update'])->name('product_update');
 
-// Route::get('allproducts', [ExampleController::class, 'index']);
-Route::get('about', [ExampleController::class, 'about']);
-Route::get('products', [ExampleController::class, 'product']);
+});
 
 
-Route::get('test', [ExampleController::class, 'test']);
 
-Route::get('add_car', [CarController::class, 'create'])->name('car_create');
-Route::get('cars', [CarController::class, 'index'])->name('car_index');
-Route::post('cars_store', [CarController::class, 'store'])->name('car_store');
-Route::get('car_edit/{id}', [CarController::class, 'edit'])->name('car_edit');
-Route::put('car_update/{id}', [CarController::class, 'update'])->name('car_update');
-Route::get('car_details/{id}', [CarController::class, 'show'])->name('car_show');
+
+// routes of cars 
+
+Route::prefix('cars')->middleware('verified')->group(function(){
+
+Route::get('create', [CarController::class, 'create'])->name('car_create');
+Route::get('index', [CarController::class, 'index'])->name('car_index');
+Route::post('store', [CarController::class, 'store'])->name('car_store');
+Route::get('edit/{id}', [CarController::class, 'edit'])->name('car_edit');
+Route::put('update/{id}', [CarController::class, 'update'])->name('car_update');
+Route::get('details/{id}', [CarController::class, 'show'])->name('car_show');
+
+});
 
 // one to many relationship
 
-Route::get('car_test', [ExampleController::class, 'car']);
+Route::get('car_test', [ExampleController::class, 'car'])->middleware('verified');
 Route::get('cat', [ExampleController::class, 'cat']);
+Route::get('test', [ExampleController::class, 'test']);
+Route::get('allproducts', [ExampleController::class, 'index']);
+Route::get('about', [ExampleController::class, 'about']);
+Route::get('products', [ExampleController::class, 'product']);
+Route::get('fashion-index', [ExampleController::class, 'index']);
+
+// images upload
+
+Route::get('upload_image', [ExampleController::class, 'uploadform']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload_image');
 
 
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// send message
+Route::get('contact_us', [ExampleController::class, 'contact']);
+Route::post('send_message', [ExampleController::class, 'send'])->name('send_message');
