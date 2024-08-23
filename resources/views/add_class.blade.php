@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<html lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">">
 
 <head>
   <meta charset="UTF-8" />
@@ -22,12 +22,14 @@
 <body>
   <main>
     <div class="container my-5">
+    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">{{ __('classes.HeadAdd') }}</h2>
         <form action="{{route('class_store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Class_name:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('classes.HeadAdd1') }}</label>
             <div class="col-md-10">
               <input type="text" placeholder="english" class="form-control py-2" name="classname" value="{{old('classname')}}"/>
               @error('classname')
@@ -36,7 +38,7 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('classes.HeadAdd2') }}</label>
             <div class="col-md-10">
               <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
               @error('price')
@@ -45,7 +47,7 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('classes.HeadAdd3') }}</label>
             <div class="col-md-10">
               <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description', 'test')}}</textarea>
               @error('description')
@@ -55,7 +57,7 @@
           </div>
           <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
-                >Time:</label
+                >{{ __('classes.HeadAdd6') }}</label
               >
               <div class="col-md-10">
                 <label for="" class="form-label">From <input type="time" class="form-control" name="time_from"></label>
@@ -67,7 +69,7 @@
             </div>
             <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
-                >Capacity:</label
+                >{{ __('classes.HeadAdd4') }}</label
               >
               <div class="col-md-10">
                 <input
@@ -84,7 +86,7 @@
             <hr>
             <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
-                >Image:</label
+                >{{ __('classes.HeadAdd5') }}</label
               >
               <div class="col-md-10">
                 <input
@@ -98,21 +100,21 @@
               @enderror
             </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Is_Fulled:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('classes.HeadAdd7') }}</label>
             <div class="col-md-10">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="is_fulled" value="1" @checked(old('is_fulled')) />
             </div>
           </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-              Add Class
+            {{ __('classes.HeadAdd8') }}
             </button>
           </div>
         </form>
       </div>
     </div>
   </main>
-
+                       
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

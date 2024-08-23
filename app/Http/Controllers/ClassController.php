@@ -22,7 +22,9 @@ class Classcontroller extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
+        session()->flash('test', 'first laravel session'); 
         return view('add_class');
     }
 
@@ -44,7 +46,7 @@ class Classcontroller extends Controller
 
         ]);
 
-        $data['image'] = $this->uploadfile($request->image, 'assets/images/cars');
+        $data['image'] = $this->uploadfile($request->image, 'assets/images/');
         $data['is_fulled'] = isset($request->is_fulled);
 
         Class1::create($data);

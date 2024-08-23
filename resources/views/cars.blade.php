@@ -27,10 +27,10 @@
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car_Title</th>
+              <th scope="col">Car_title</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
-              <th scope="col">Published</th>
+              <th scope="col">published</th>
               <th scope="col">Edit</th>
               <th scope="col">Details</th>
               <th scope="col">Delete</th>
@@ -43,9 +43,6 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::Limit($car['description'], 20, '...')}}</td>
               <td>@if($car['published']==1) yes @else no @endif</td>
-              <td><a href="{{route('car_edit', $car['id'])}}">Edit</a></td>
-              <td><a href="{{route('car_show', $car['id'])}}">Details</a></td>
-
               <td>
              </td>
              </form>

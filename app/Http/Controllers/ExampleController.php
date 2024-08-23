@@ -82,7 +82,8 @@ public function cat(string $id)
 
 
     
-    public function contact() {
+    public function contact() { 
+        session()->put('test', 'first laravel session');    
         return view('contact_us');
 
 }

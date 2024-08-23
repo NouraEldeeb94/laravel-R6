@@ -13,6 +13,13 @@ Route::get('/', function () {
 });
 
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+   
+
  Route::prefix('classes')->group(function(){
 Route::get('create', [ClassController::class, 'create'])->name('class_create');
 Route::post('store', [ClassController::class, 'store'])->name('class_store');
@@ -29,7 +36,7 @@ Route::get('class_delete/{id}', [ClassController::class, 'destroy'])->name('clas
  });
 
 
-
+});
 
 
 // routes of products
@@ -44,18 +51,15 @@ Route::put('update/{id}', [ProductsController::class, 'update'])->name('product_
 });
 
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
 
-
-// routes of cars 
-
-Route::prefix('cars')->middleware('verified')->group(function(){
-
-Route::get('create', [CarController::class, 'create'])->name('car_create');
-Route::get('index', [CarController::class, 'index'])->name('car_index');
-Route::post('store', [CarController::class, 'store'])->name('car_store');
-Route::get('edit/{id}', [CarController::class, 'edit'])->name('car_edit');
-Route::put('update/{id}', [CarController::class, 'update'])->name('car_update');
-Route::get('details/{id}', [CarController::class, 'show'])->name('car_show');
+Route::get('add_car', [CarController::class, 'create'])->name('car_create');
+Route::post('car_added', [CarController::class, 'store'])->name('car_store');
+Route::get('cars', [CarController::class, 'index'])->name('cars_index');
 
 });
 
