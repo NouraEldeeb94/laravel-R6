@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\Common;
 use App\Models\Car;
+use App\Models\Category;
 
 class CarController extends Controller
 {
@@ -22,7 +23,9 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories = Category::select('id', 'category_name')->get();
+        // dd($categories);
+        return view('add_car', compact('categories'));
     }
 
     /**
@@ -35,14 +38,16 @@ class CarController extends Controller
             'price' => 'required|numeric|min:100',
             'description' => 'required|string|max:1000',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required|exists:categories,id',
 
         ]);
 
         $data['image'] = $this->uploadfile($request->image, 'assets/images/cars');
         $data['published'] = isset($request->published);
+    
 
         Car::create($data);
-        return redirect()->route('cars_index');
+        return redirect()->route('cars')->with('content', 'Car added successfully');
 
     }
 

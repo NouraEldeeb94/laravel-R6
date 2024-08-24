@@ -17,7 +17,7 @@ class CarFactory extends Factory
     public function definition(): array
     {
         return [
-        'title' => fake()->randomElement(['bmw', 'toyota', 'begaty']),
+        'car_title' => fake()->randomElement(['bmw', 'toyota', 'begaty']),
             'price' => fake()->randomFloat(2),
             'description' => fake()->text(),
             'published' => fake()->numberBetween(0, 1),

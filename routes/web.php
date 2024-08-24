@@ -58,8 +58,8 @@ Route::group(
     ], function(){ 
 
 Route::get('add_car', [CarController::class, 'create'])->name('car_create');
-Route::post('car_added', [CarController::class, 'store'])->name('car_store');
-Route::get('cars', [CarController::class, 'index'])->name('cars_index');
+Route::post('car_stored', [CarController::class, 'store'])->name('car_store');
+Route::get('cars', [CarController::class, 'index'])->name('car_index');
 
 });
 

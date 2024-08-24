@@ -31,7 +31,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.carname') }}</label>
             <div class="col-md-10">
-              <input type="text" placeholder="" class="form-control py-2" name="car_title" value="{{old('car_title')}}"/>
+              <input type="text" placeholder="{{ __('cars.Select car') }}" class="form-control py-2" name="car_title" value="{{old('car_title')}}"/>
               @error('car_title')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
@@ -40,9 +40,23 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.price') }}</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="" class="form-control py-2" name="price" value="{{old('price')}}"/>
+              <input type="number" step="0.1" placeholder="{{ __('cars.select price') }}" class="form-control py-2" name="price" value="{{old('price')}}"/>
               @error('price')
               <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Category') }}</label>
+            <div class="col-md-10">
+              <select name="category_id" id="" class="form-control">
+                <option value="">{{ __('cars.Select Category') }}</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->category_name}}</option>
+                @endforeach
+              </select>
+              @error('category_id')
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
@@ -61,7 +75,7 @@
               >
               <div class="col-md-10">
                 <input
-                  type="file"
+                  type="file" 
                   class="form-control"
                   style="padding: 0.7rem;" name="image"
                 />
