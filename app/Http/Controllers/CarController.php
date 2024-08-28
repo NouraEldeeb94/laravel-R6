@@ -47,7 +47,7 @@ class CarController extends Controller
     
 
         Car::create($data);
-        return redirect()->route('cars')->with('content', 'Car added successfully');
+        return redirect()->route('car_index')->with('content', 'Car added successfully');
 
     }
 

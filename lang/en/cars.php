@@ -13,6 +13,7 @@ return [
     'published' =>  'published',
     'Category' =>  'Category',
     'Select Category' =>  'Select Category',
+    'category_name' => 'category_name',
     'button' => 'add Car',
 
 

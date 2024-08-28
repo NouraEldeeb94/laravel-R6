@@ -13,6 +13,7 @@ return [
     'published' => 'متاح',
     'Category' => 'النوع',
     'Select Category' =>  'اختر النوع',
+    'category_name' => 'اسم النوع',
    
     'button' => 'اضافه سياره',
 
